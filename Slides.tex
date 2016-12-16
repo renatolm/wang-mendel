@@ -28,6 +28,7 @@
 \usepackage{array}
 \usepackage{amsthm}
 \usepackage{subfigure}
+\usepackage{multirow}
 %\usepackage{psfrag}
 %\usepackage{color}
 %\usepackage{lipsum}
@@ -133,7 +134,7 @@ E então nos casos de conflito são descartadas as regras com menor "grau de confi
 
 \hspace{3cm}
 
-Nesta etapa também é possível agregar o conhecimento de um especialista ou controlar a influência de dados que possam conter erros de medição. Isto é feito acrescentando-se um novo parâmetro $m^{(n)}$ à equação anterior:
+Nesta etapa também é possível agregar o conhecimento de um especialista e/ou controlar a influência de dados que possam conter erros de medição. Isto é feito acrescentando-se um novo parâmetro $m^{(n)}$ à equação anterior:
 \begin{center}
 $D(\text{Regra n})= m_{B1}(x_1^{(n)}).m_{S1}(x_2^{(n)}).m_{CE}(y^{(n)}).m^{(n)}$
 \end{center}
@@ -144,15 +145,45 @@ $D(\text{Regra n})= m_{B1}(x_1^{(n)}).m_{S1}(x_2^{(n)}).m_{CE}(y^{(n)}).m^{(n)}$
 \section{Passo 4: Criação de uma Base de Regras}
 \frame{
 \frametitle{Passo 4: Criação de uma Base de Regras} 
+No caso simples do nosso exemplo são possíveis 35 regras distintas conforme a tabela a seguir:
+\begin{table}[]
+\centering
+\begin{tabular}{lllllllll}
+\multicolumn{1}{c}{} &                         & \multicolumn{7}{c}{x2}                                                                                                                                                \\
+\multicolumn{1}{c}{} &                         & S3                    & S2                    & S1                    & CE                    & B1                    & B2                    & B3                    \\ \cline{3-9} 
+\multirow{5}{*}{x1}  & \multicolumn{1}{l|}{S2} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} \\ \cline{3-9} 
+                     & \multicolumn{1}{l|}{S1} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} \\ \cline{3-9} 
+                     & \multicolumn{1}{l|}{CE} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} \\ \cline{3-9} 
+                     & \multicolumn{1}{l|}{B1} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} \\ \cline{3-9} 
+                     & \multicolumn{1}{l|}{B2} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} \\ \cline{3-9} 
+\end{tabular}
+\caption{Base de regras}
+\label{base_de_regras}
+\end{table}
+}
+
+\frame{
+\frametitle{Passo 4: Criação de uma Base de Regras} 
+Idealmente, cada entrada da tabela anterior deve ter um valor associado que foi obtido no passo 3. Porém, podem existir combinações de antecedentes que não foram cobertas pelo conjunto de treinamento.
+
+\hspace{3cm}
+
+Nestes casos, podem ser criadas regras linguísticas com o apoio de um especialista para completar a base de regras.
+\newline
+Este artifício também pode ser utilizado para substituir regras que apresentem um baixo "grau de confiabilidade".
 
 }
 
 %% ----------------------------------------------------------------------------
 
-\section{Passo 5: Defuzzificação}
+\section{Passo 5: Inferência e Defuzzificação}
 \frame{
-\frametitle{Passo 5: Defuzzificação}
+\frametitle{Passo 5: Inferência e Defuzzificação}
+Por fim, com as devidas adaptações, podemos utilizar diferentes métodos de inferência e de defuzzificação dos resultados para tratar dados novos.
 
+\hspace{3cm}
+
+Os métodos de inferência e defuzzificação mais utilizados são Mamdani e Centróide, respectivamente.
 }
 
 %% ----------------------------------------------------------------------------
@@ -160,9 +191,50 @@ $D(\text{Regra n})= m_{B1}(x_1^{(n)}).m_{S1}(x_2^{(n)}).m_{CE}(y^{(n)}).m^{(n)}$
 \section{Aplicação 1: Backer-Upper Truck}
 \frame{
 \frametitle{Aplicação 1: Back-Upper Truck}
+Trata-se de um problema clássico da literatura que consiste em estacionar um caminhão de ré em uma doca.
+\newline
+As variáveis de entrada são:
+\begin{itemize}
+\item $x$ - posição do caminhão no eixo horizontal
+\item $\phi$ - ângulo do caminhão em relação ao eixo horizontal
+\end{itemize}
+E a variável de saída é:
+\begin{itemize}
+\item $\theta$ - ângulo das rodas dianteiras em relação ao eixo do caminhão
+\end{itemize}
 
+%figura do caminhão
 }
 
+\frame{
+\frametitle{Aplicação 1: Back-Upper Truck}
+Para a obtenção do conjunto de dados de treinamento foram utilizados 14 estados iniciais (posição e ângulo) e as seguintes equações cinemáticas aproximadas:
+\begin{center}
+$x(t+1) = x(t) + \cos[\phi(t)+\theta(t)]+\sin[\theta(t)]\sin[\phi(t)]$
+\end{center}
+\begin{center}
+$\phi(t+1) = \phi(t) - \sin^{-1}[\frac{2\sin(\theta(t))}{b}]$
+\end{center}
+onde $b$ é o tamanho do caminhão, no nosso caso $b = 4$.
+
+\hspace{3cm}
+
+Os estados iniciais e dados de treinamento podem ser vistos em \cite{wangmendel2}
+}
+
+\frame{
+\frametitle{Aplicação 1: Back-Upper Truck}
+Os conjuntos fuzzy definidos para as variáveis de entrada e saída estão representados nas figuras a seguir:
+
+%figuras das pertinencias
+}
+
+\frame{
+\frametitle{Aplicação 1: Back-Upper Truck}
+E a base de regras obtida a partir dos dados numéricos foi a seguinte:
+
+%figura da base de regras
+}
 %% ----------------------------------------------------------------------------
 
 \section{Aplicação 2: Série temporal de Mackey-Glass}
@@ -187,7 +259,9 @@ $D(\text{Regra n})= m_{B1}(x_1^{(n)}).m_{S1}(x_2^{(n)}).m_{CE}(y^{(n)}).m^{(n)}$
 \scriptsize
 \begin{thebibliography}{72}
 
-\bibitem{wangmendel} L.  Wang  and  J.  M.  Mendel,  {\it Generating  fuzzy  rules  by  learning  from examples} IEEE Trans. Syst., Man, Cybern., vol. 22, no. 6, pp. 1414?1427, (1992).
+\bibitem{wangmendel} L.  Wang  and  J.  M.  Mendel,  {\it Generating  fuzzy  rules  by  learning  from examples} IEEE Trans. Syst., Man, Cybern., vol. 22, no. 6, pp. 1414-1427, (1992).
+
+\bibitem{wangmendel2} L. Wang and J. M. Mendel, {\it Generating fuzzy rules from numerical data, with applications}, USC SIPI Rep. No. 169, Univ. Southern Calif., Los Angeles, (1991).
 
 \end{thebibliography}
 } 
