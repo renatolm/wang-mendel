@@ -98,6 +98,10 @@ $[x_1^{-},x_1^{+}], [x_2^{-},x_2^{+}], [y^{-},y^{+}]$
 \end{center}
 Podemos criar as seguintes regiões fuzzy utilizando funções de pertinência triangulares:
 %figura das regiões fuzzy%
+\begin{figure}[H]
+    %\centering
+    \includegraphics[scale=0.25]{pertinencias.png}
+\end{figure}
 %comentar que é importante ter a soma das pertinências para um dado ponto igual a 1 para obter uma boa performance do algoritmo
 }
 
@@ -110,10 +114,12 @@ Em seguida, para cada par \textbf{entradas}-\textbf{saída} são determinados os g
 \begin{center}
 $(x_1^{(n)},x_2^{(n)};y^{(n)})$
 \end{center}
-%figura com as pertinências da entrada indicadas
+
 Podemos gerar a seguinte regra:
 \begin{center}
 $(x_1^{(n)},x_2^{(n)};y^{(n)}) \Rightarrow [(x_1^{(n)}(0.8\text{ em }B1),x_2^{(n)}(0.7\text{ em }S1);y^{(n)}(0.9\text{ em }CE)] \Rightarrow \text{Regra n}$ \\
+\hspace{3cm}
+
 \textbf{SE} $x_1$ é $B1$ e $x_2$ é $S1$, \textbf{ENTÃO} $y$ é $CE$
 \end{center}
 }
@@ -204,6 +210,10 @@ E a variável de saída é:
 \end{itemize}
 
 %figura do caminhão
+\begin{figure}[H]
+    %\centering
+    \includegraphics[scale=0.25]{truck.png}
+\end{figure}
 }
 
 \frame{
@@ -227,6 +237,18 @@ Os estados iniciais e dados de treinamento podem ser vistos em \cite{wangmendel2
 Os conjuntos fuzzy definidos para as variáveis de entrada e saída estão representados nas figuras a seguir:
 
 %figuras das pertinencias
+\begin{figure}[H]
+    %\centering
+    \includegraphics[scale=0.25]{phi.png}
+\end{figure}
+\begin{figure}[H]
+    %\centering
+    \includegraphics[scale=0.25]{x.png}
+\end{figure}
+\begin{figure}[H]
+    %\centering
+    \includegraphics[scale=0.25]{theta.png}
+\end{figure}
 }
 
 \frame{
@@ -234,22 +256,85 @@ Os conjuntos fuzzy definidos para as variáveis de entrada e saída estão represen
 E a base de regras obtida a partir dos dados numéricos foi a seguinte:
 
 %figura da base de regras
+\begin{figure}[H]
+    %\centering
+    \includegraphics[scale=0.5]{rule-base.png}
+\end{figure}
 }
+
+\frame{
+\frametitle{Aplicação 1: Back-Upper Truck}
+Os resultados obtidos foram:
+
+%figura do caminhão quase certo
+%figura do caminhão certo
+\begin{figure}
+\hfill
+\subfigure[Normal]{\includegraphics[scale=0.25]{quase.png}}
+\hfill
+\subfigure[Modificado]{\includegraphics[scale=0.25]{bom.png}}
+\hfill
+%\caption{Title for both}
+\end{figure}
+}
+
 %% ----------------------------------------------------------------------------
 
 \section{Aplicação 2: Série temporal de Mackey-Glass}
 \frame{
 \frametitle{Aplicação 2: Série temporal de Mackey-Glass}
+A série temporal de Mackey-Glass é gerada a partir da seguinte equação diferencial com atraso:
+\begin{center}
+$\frac{dx(t)}{dt} = \frac{0.2x(t-\tau)}{1+x^{10}(t-\tau)} -0.1x(t)$
+\end{center}
+Quando $\tau > 17$ a série apresenta um comportamento caótico, ou seja, se torna uma série temporal aparentemente randômica.
+}
 
+\frame{
+\frametitle{Aplicação 2: Série temporal de Mackey-Glass}
+Utilizando $\tau = 30$ e calculando os primeiros $1000$ pontos da série, obtemos o seguinte gráfico:
+
+%figura da série de Mackey-Glass
+\begin{figure}[H]
+    %\centering
+    \includegraphics[scale=0.5]{mackey-glass.png}
+\end{figure}
+}
+
+\frame{
+\frametitle{Aplicação 2: Série temporal de Mackey-Glass}
+Vamos utilizar $9$ pontos consecutivos para prever o valor do próximo ponto.
+
+\hspace{3cm}
+
+Neste caso, os espaços das variáveis de entrada e de saída serão os mesmos, e podem ser divididos da seguinte maneira:
+
+%figura das regiões fuzzy
+\begin{figure}[H]
+    %\centering
+    \includegraphics[scale=0.5]{mackey-glass-pert.png}
+\end{figure}
+
+}
+
+\frame{
+\frametitle{Aplicação 2: Série temporal de Mackey-Glass}
+Utilizando os primeiros $700$ pontos da série como conjunto de treinamento e os últimos $300$ como conjunto de testes, obtemos o resultado da figura:
+
+%figura da previsao usando wang mendel
+\begin{figure}[H]
+    %\centering
+    \includegraphics[scale=0.5]{mackey-glass-pred.png}
+\end{figure}
 }
 
 %% ----------------------------------------------------------------------------
 
-\section{Aplicação 3: Como ficar milionário?}
-\frame{
-\frametitle{Aplicação 3: Como ficar milionário?}
+%\section{Aplicação 3: Como ficar milionário?}
+%\frame{
+%\frametitle{Aplicação 3: Como ficar milionário?}
 
-}
+%}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Slide 33- Referências %%%%%%%%%%%%%%%%%%%%
 \section{Referências}
