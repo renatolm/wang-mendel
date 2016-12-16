@@ -20,7 +20,7 @@
 \usepackage{enumerate}
 \usepackage{multicol}
 \usepackage{tikz}
-\usepackage{eqnarray}
+%\usepackage{eqnarray}
 \usepackage{setspace}
 \usepackage{dsfont}
 %\usepackage[dvips]{graphicx}
@@ -63,7 +63,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Slide 2 - Sumário %%%%%%%%%%%%%%%%%%%%
 \small
 \frame{
-\frametitle{Roteiro}
+\frametitle{Sumário}
 \tableofcontents}
 
 %% ----------------------------------------------------------------------------
@@ -72,7 +72,15 @@
 
 \frame{
 \frametitle{Visão Geral}
+Esta apresentação descreve o método geral proposto por Li-Xin Wang e Jerry Mendel \cite{wangmendel} para geração de uma base de regras fuzzy a partir de dados numéricos.
 
+\hspace{3cm}
+
+O método consiste de 5 passos, que serão detalhados a seguir. E após, serão apresentados alguns exemplos de aplicação em problemas diversos.
+
+\hspace{3cm}
+
+Para facilitar o entendimento do método vamos considerar um caso simples com \textbf{2 variáveis de entrada} e \textbf{1 variável de saída}, que poderá ser facilmente estendido para casos mais gerais ao final.
 }
 
 %% ----------------------------------------------------------------------------
@@ -81,7 +89,15 @@
 
 \frame{
 \frametitle{Passo 1: Divisão dos espaços de entradas e saídas}
-
+Inicialmente, é necessário dividir os intervalos de valores possíveis das variáveis de entrada e saída em regiões fuzzy.
+\newline
+Supondo que os domínios das variáveis de entrada e saída sejam respectivamente:
+\begin{center}
+$[x_1^{-},x_1^{+}], [x_2^{-},x_2^{+}], [y^{-},y^{+}]$
+\end{center}
+Podemos criar as seguintes regiões fuzzy utilizando funções de pertinência triangulares:
+%figura das regiões fuzzy%
+%comentar que é importante ter a soma das pertinências para um dado ponto igual a 1 para obter uma boa performance do algoritmo
 }
 
 %% ----------------------------------------------------------------------------
@@ -89,7 +105,16 @@
 \section{Passo 2: Geração de regras fuzzy a partir dos dados}
 \frame{
 \frametitle{Passo 2: Geração de regras fuzzy a partir dos dados}
-
+Em seguida, para cada par \textbf{entradas}-\textbf{saída} são determinados os graus de pertinência e é gerada uma regra. Por exemplo considerando o seguinte par:
+\begin{center}
+$(x_1^{(n)},x_2^{(n)};y^{(n)})$
+\end{center}
+%figura com as pertinências da entrada indicadas
+Podemos gerar a seguinte regra:
+\begin{center}
+$(x_1^{(n)},x_2^{(n)};y^{(n)}) \Rightarrow [(x_1^{(n)}(0.8\text{ em }B1),x_2^{(n)}(0.7\text{ em }S1);y^{(n)}(0.9\text{ em }CE)] \Rightarrow \text{Regra n}$ \\
+\textbf{SE} $x_1$ é $B1$ e $x_2$ é $S1$, \textbf{ENTÃO} $y$ é $CE$
+\end{center}
 }
 
 %% ----------------------------------------------------------------------------
@@ -98,7 +123,20 @@
 
 \frame{
 \frametitle{Passo 3: Associando um grau a cada regra}
+Após o passo anterior devemos ter uma grande quantidade de regras (1 para cada par entradas-saída), e inclusive regras conflitantes entre si (antecedentes iguais mas consequentes diferentes).
+\newline
+Para resolver tais conflitos, é associado um "grau de confiabilidade" a cada regra dado por:
+\begin{center}
+$D(\text{Regra n})= m_{B1}(x_1^{(n)}).m_{S1}(x_2^{(n)}).m_{CE}(y^{(n)})$
+\end{center}
+E então nos casos de conflito são descartadas as regras com menor "grau de confiabilidade".
 
+\hspace{3cm}
+
+Nesta etapa também é possível agregar o conhecimento de um especialista ou controlar a influência de dados que possam conter erros de medição. Isto é feito acrescentando-se um novo parâmetro $m^{(n)}$ à equação anterior:
+\begin{center}
+$D(\text{Regra n})= m_{B1}(x_1^{(n)}).m_{S1}(x_2^{(n)}).m_{CE}(y^{(n)}).m^{(n)}$
+\end{center}
 }
 
 %% ----------------------------------------------------------------------------
@@ -119,7 +157,7 @@
 
 %% ----------------------------------------------------------------------------
 
-\section{Aplicação 1: Back-Upper Truck}
+\section{Aplicação 1: Backer-Upper Truck}
 \frame{
 \frametitle{Aplicação 1: Back-Upper Truck}
 
@@ -149,33 +187,9 @@
 \scriptsize
 \begin{thebibliography}{72}
 
-\bibitem{zadeh} Zadeh, L. A. {\it Fuzzy sets}. Information and Control 8(3), 338-353 (1965)
-
-\bibitem{vassilis} Kaburlasos, V. G., Kehagias, A. {\it Fuzzy inference system (FIS) extensions based on the lattice theory}. Fuzzy Systems, IEEE Transactions on 22(3), 531-546 (2014)
-
-\bibitem{gomide} Pedrycz, W., Gomide, F. {\it An introduction to fuzzy sets: analysis and design}. Mit Press, 1998
-
-\bibitem{art1} Fourquet, J., et al. {\it Characteristics of women with endometriosis from the USA and Puerto Rico}. J. of Endometriosis and Pelvic Pain Disorders. 7(4), 129--135 (Out. 2015)
-
-\bibitem{vigano} Viganò, P., Parazzini, F., Somigliana, E., Vercellini, P. {\it Endometriosis: epidemiology and aetiological factors}. Best Pract Res Clin Obstet Gynecol. 18(2),177-200 (2004) 
-
-\bibitem{febrasgo} Federação Brasileira das Associações de Ginecologia e Obstetrícia. {\it Cartilha da Endometriose}
-
-\bibitem{kouhung} Kouhung, W., et al. {\it Characteristics of patients with endometriosis in the United States and the United Kingdom}. Fertility and Stelirity, 78(4), 767-772 (Out. 2002)
-
-\bibitem{ballweg} Ballweg, M. L. {\it Impact of endometriosis on women's health: comparative historical data show that the earlier the onset, the more severe the disease}. Best Pract Res Clin Obstet Gynecol. 18(2), 201-218 (2004)
-
-\bibitem{fourquet} Fourquet, J., et al. {\it Patients' report on how endometriosis affects heatlh, work, and daily life}. Fertility and Sterility, 93(7), 2424-2428 (Mai. 2010)
-
-\bibitem{laecio} Barros, L. C. de, Bassanezi, R. C. {\it Tópicos de lógica fuzzy e biomatemática}. 
-Grupo de Biomatemática, Instituto de Matemática, Estatística e Computação Científica (IMECC), Universidade Estadual de Campinas (UNICAMP), (2006).
-
+\bibitem{wangmendel} L.  Wang  and  J.  M.  Mendel,  {\it Generating  fuzzy  rules  by  learning  from examples} IEEE Trans. Syst., Man, Cybern., vol. 22, no. 6, pp. 1414?1427, (1992).
 
 \end{thebibliography}
 } 
 
-\frame{
-\frametitle{Implementação} 
-\url{https://github.com/renatolm/wang-mendel/}
-}
 \end{document}
