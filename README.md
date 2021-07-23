@@ -66,6 +66,10 @@ For a classification example (predicting Blood donations): https://github.com/re
 
 - Add support to fuzzy inputs
 
+- Make the interface more compliant with scikit-learn style
+
 - Create tests!
+
+- Add more examples
 
 - Turn the project into a package and publish on PyPI
