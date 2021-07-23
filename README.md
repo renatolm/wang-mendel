@@ -1,7 +1,7 @@
 
 # Wang-Mendel
 
-This is an implementation fo the Wang-Mendel algorithm to learn a fuzzy 
+This is an implementation of the Wang-Mendel algorithm to learn a fuzzy 
 rule base from data.
 
 
@@ -52,6 +52,7 @@ to get a number.
 ```python
 defuzz.centroid(y, f_y)
 ```
+
 
 #### <u>Examples</u>:
 For a more detailed regression example (predicting the Mackey-Glass series): https://github.com/renatolm/wang-mendel/blob/master/Examples/Mackey-Glass/Mackey-Glass.ipynb
