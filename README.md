@@ -58,3 +58,14 @@ defuzz.centroid(y, f_y)
 For a more detailed regression example (predicting the Mackey-Glass series): https://github.com/renatolm/wang-mendel/blob/master/Examples/Mackey-Glass/Mackey-Glass.ipynb
 
 For a classification example (predicting Blood donations): https://github.com/renatolm/wang-mendel/blob/master/Examples/Blood/Blood.ipynb
+
+
+
+
+## Roadmap
+
+- Add support to fuzzy inputs
+
+- Create tests!
+
+- Turn the project into a package and publish on PyPI
